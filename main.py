@@ -6,33 +6,52 @@ products = [
 
 def print_products():
     for product in products:
-        print(f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}\n")
+        print(f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}\n {product['availability']}")
     if not products:
         print("Sklad je prázdný")
 
 
 def add_product():
     product_name = input("Název produktu:")
-    product_price = input("Název cenu:")
-    product_amount = input("Název množství:")
+    product_price = int(input("Cena produktu:"))
+    product_amount = int(input("Množství:"))
+    product_availability = ""
     product = {
         'name': product_name,
         'price': product_price,
-        'amount': product_amount
+        'amount': product_amount,
+        'availability': product_availability
     }
+
+    if product_price == "":
+        product['price'] = "undefined"
+    if product_amount == "":
+        product['amount'] = "undefined"
+    elif product_amount == 0:
+        product['availability'] = "Není skladem"
+    else:
+        product['availability'] = "Skladem"
 
     products.append(product)
 
+
 def remove_product():
-    for index, product in enumerate(products):
-        print(f"{index + 1}. {product['name']} - {product['price']}$ - {product['amount']} ks")
-
-    remove_choice = int(input("Zadej číslo produktu, který chceš smazat: ")) - 1
-
-    if 0 <= remove_choice < len(products):
-        products.pop(remove_choice)
+    remove_all = int(input("Chete odtranit všechny produkty? 1 - ano, 2 - ne: "))
+    if remove_all == 1:
+        products.clear()
+        print_products()
+        return
     else:
-        print("Neplatná volba")
+        for index, product in enumerate(products):
+            print(f"{index + 1}. {product['name']} - {product['price']}$ - {product['amount']} ks")
+
+        remove_choice = int(input("Zadej číslo produktu, který chceš smazat: ")) - 1
+
+        if 0 <= remove_choice < len(products):
+            products.pop(remove_choice)
+        else:
+            print("Neplatná volba")
+
 
 def search_product():
     search = input("Zadej název produktu: ")
@@ -100,7 +119,7 @@ def menu():
     print("###############\n")
     print("0. Výpis položek")
     print("1. Přidání položky")
-    print("2. Celková cena")
+    print("2. Odtranění položky")
     print("3. Celková cena")
     print("4. Nejvyšší cena")
     print("5. Nejnižší cena")
