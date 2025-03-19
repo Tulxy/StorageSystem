@@ -26,29 +26,29 @@ def add_product():
     products.append(product2)
 
 
+def total_price():
+    total = sum([product['price'] for product in products])
+    print(f"Celková cena: {total}$")
+
+
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
     print("1. Výpis polože")
-    print("2. Přidání položky\n")
+    print("2. Přidání položky")
+    print("3. Celková cena")
 
     choice = int(input("Volba: "))
 
-    if choice == 1:
-        print("Položky na skladě jsou:")
-        print_products()
-        print("")
-        menu()
-
-    elif choice == 2:
-        print("Přidání poožky:")
-        add_product()
-        print("")
-        menu()
-
-    else:
-        print("Zadal jsi špatně!\n")
-        menu()
+    match choice:
+        case 1:
+            print_products()
+        case 2:
+            add_product()
+        case 3:
+            total_price()
+        case _:
+            print("Neplatná volba")
 
 
 menu()
