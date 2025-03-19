@@ -36,6 +36,11 @@ def max_price():
     print(f"Nejvyšší cena: {maximum_price}$")
 
 
+def min_price():
+    minimum_price = min([product['price'] for product in products])
+    print(f"Nejnižší cena: {minimum_price}$")
+
+
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
@@ -59,6 +64,9 @@ def menu():
         case 4:
             print("Nejvyšší cena")
             max_price()
+        case 5:
+            print("Nejnižší cena")
+            min_price()
         case _:
             print("Neplatná volba")
 
