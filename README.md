@@ -2,6 +2,7 @@
 ---
 ## Funkce 🛠️:
 - Přidávání produktů
+- Odstranění produktu
 - Vypsání produktů na skladě
 - Vypsání celkové ceny produktů
 - Vypsání nejdražšího produktu
