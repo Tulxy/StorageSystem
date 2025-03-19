@@ -7,6 +7,8 @@ products = [
 def print_products():
     for product in products:
         print(f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}\n")
+    if not products:
+        print("Sklad je prázdný")
 
 
 def add_product():
@@ -21,6 +23,16 @@ def add_product():
 
     products.append(product)
 
+def remove_product():
+    for index, product in enumerate(products):
+        print(f"{index + 1}. {product['name']} - {product['price']}$ - {product['amount']} ks")
+
+    remove_choice = int(input("Zadej číslo produktu, který chceš smazat: ")) - 1
+
+    if 0 <= remove_choice < len(products):
+        products.pop(remove_choice)
+    else:
+        print("Neplatná volba")
 
 def search_product():
     search = input("Zadej název produktu: ")
@@ -86,8 +98,9 @@ def edit_product():
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
-    print("1. Výpis položek")
-    print("2. Přidání položky")
+    print("0. Výpis položek")
+    print("1. Přidání položky")
+    print("2. Celková cena")
     print("3. Celková cena")
     print("4. Nejvyšší cena")
     print("5. Nejnižší cena")
@@ -99,14 +112,18 @@ def menu():
     choice = int(input("Volba: \n"))
 
     match choice:
-        case 1:
+        case 0:
             print("### Vypsání položek #### ")
             print_products()
             print("")
             menu()
-        case 2:
+        case 1:
             print("### Přidání položky ###")
             add_product()
+            print("")
+            menu()
+        case 2:
+            remove_product()
             print("")
             menu()
         case 3:
