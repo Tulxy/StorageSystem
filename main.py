@@ -12,8 +12,16 @@ def print_products():
 
 def add_product():
     product_name = input("Název produktu:")
-    product_price = int(input("Cena produktu:"))
-    product_amount = int(input("Množství:"))
+    try:
+        product_price = int(input("Cena produktu:"))
+    except ValueError:
+        product_price = 0
+
+    try:
+        product_amount = int(input("Množství:"))
+    except ValueError:
+        product_amount = 0
+
     product_availability = ""
     product = {
         'name': product_name,
@@ -22,11 +30,7 @@ def add_product():
         'availability': product_availability
     }
 
-    if product_price == "":
-        product['price'] = "undefined"
-    if product_amount == "":
-        product['amount'] = "undefined"
-    elif product_amount == 0:
+    if product_amount == 0:
         product['availability'] = "Není skladem"
     else:
         product['availability'] = "Skladem"
@@ -76,11 +80,17 @@ def search_product():
 
 
 def total_price():
+    if not products:
+        print("Sklad je prázdný")
+        return
     total = sum([product['price'] for product in products])
     print(f"Celková cena: {total}$")
 
 
 def max_price():
+    if not products:
+        print("Sklad je prázdný")
+        return
     maximum_price = max([product['price'] for product in products])
     for product in products:
         if product['price'] == maximum_price:
@@ -88,6 +98,9 @@ def max_price():
 
 
 def min_price():
+    if not products:
+        print("Sklad je prázdný")
+        return
     minimum_price = min([product['price'] for product in products])
     for product in products:
         if product['price'] == minimum_price:
@@ -95,6 +108,9 @@ def min_price():
 
 
 def max_amount():
+    if not products:
+        print("Sklad je prázdný")
+        return
     maximum_amount = max([product['amount'] for product in products])
     for product in products:
         if product['amount'] == maximum_amount:
@@ -102,6 +118,9 @@ def max_amount():
 
 
 def average_price():
+    if not products:
+        print("Sklad je prázdný")
+        return
     average = sum([product['price'] for product in products]) / len(products)
     print(f"Průměrná cena: {average}$")
 
