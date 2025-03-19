@@ -41,6 +41,10 @@ def min_price():
     print(f"Nejnižší cena: {minimum_price}$")
 
 
+def average_price():
+    average = sum([product['price'] for product in products]) / len(products)
+    print(f"Průměrná cena: {average}$")
+
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
@@ -48,25 +52,30 @@ def menu():
     print("2. Přidání položky")
     print("3. Celková cena")
     print("4. Nejvyšší cena")
+    print("5. Nejnižší cena")
+    print("6. Průměrná cena")
 
     choice = int(input("Volba: "))
 
     match choice:
         case 1:
-            print("Vypsání položek")
+            print("### Vypsání položek #### ")
             print_products()
         case 2:
-            print("Přidání položky")
+            print("### Přidání položky ###")
             add_product()
         case 3:
-            print("Celková cena")
+            print("### Celková cena ###")
             total_price()
         case 4:
-            print("Nejvyšší cena")
+            print("### Nejvyšší cena ###")
             max_price()
         case 5:
-            print("Nejnižší cena")
+            print("### Nejnižší cena ###")
             min_price()
+        case 6:
+            print("### Průměrná cena ###")
+            average_price()
         case _:
             print("Neplatná volba")
 
