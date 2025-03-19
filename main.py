@@ -1,20 +1,26 @@
-from pyautogui import doubleClick
 
 products = [
     {
         "name": "Audi",
-        "price": 50
+        "price": 50,
+        "amount": 50
+    },
+    {
+        "name": "Audi",
+        "price": 50,
+        "amount": 50
     },
     {
         "price": 30,
         "name": "BMW",
+        "amount": 10
     }
 ]
 
 
 def print_products():
     for product in products:
-        print(f"Název produktu: {product['name']}, cena: {product['price']}$")
+        print(f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}\n")
 
 
 def add_product():
@@ -34,7 +40,7 @@ def search_product():
 
     for product in products:
         if search.lower() in product['name'].lower():
-            print(f"Název produktu: {product['name']}, cena: {product['price']}$")
+            print(f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}")
             found = True
     if not found:
         print("Produkt nebyl nalezen")
@@ -47,12 +53,23 @@ def total_price():
 
 def max_price():
     maximum_price = max([product['price'] for product in products])
-    print(f"Nejvyšší cena: {maximum_price}$")
+    for product in products:
+        if product['price'] == maximum_price:
+            print(f"Nejvyšší cena: {product['name']} - {product['price']}$")
 
 
 def min_price():
     minimum_price = min([product['price'] for product in products])
-    print(f"Nejnižší cena: {minimum_price}$")
+    for product in products:
+        if product['price'] == minimum_price:
+            print(f"Nejnižší cena: {product['name']} - {product['price']}$")
+
+
+def max_amount():
+    maximum_amount = max([product['amount'] for product in products])
+    for product in products:
+        if product['amount'] == maximum_amount:
+            print(f"Nejvyšší množství: {product['name']} - {product['amount']} ks")
 
 
 def average_price():
@@ -62,16 +79,18 @@ def average_price():
 
 def edit_product():
     for index, product in enumerate(products):
-        print(f"{index + 1}. {product['name']} - {product['price']}$")
+        print(f"{index + 1}. {product['name']} - {product['price']}$ - {product['amount']} ks")
 
     edit_choice = int(input("Zadej číslo produktu, který chceš upravit: ")) - 1
 
     if 0 <= edit_choice < len(products):
         new_name = input("Zadej nový název produktu: ")
         new_price = int(input("Zadej novou cenu produktu: "))
+        new_amount = int(input("Zadej nové množství produktu: "))
 
         products[edit_choice]['name'] = new_name
         products[edit_choice]['price'] = new_price
+        products[edit_choice]['amount'] = new_amount
     else:
         print("Neplatná volba")
 
@@ -87,6 +106,7 @@ def menu():
     print("6. Průměrná cena")
     print("7. Upravit položku")
     print("8. Hledání položky")
+    print("9. Nejvyšší množství")
 
     choice = int(input("Volba: \n"))
 
@@ -129,6 +149,11 @@ def menu():
         case 8:
             print("### Hledání položky ###")
             search_product()
+            print("")
+            menu()
+        case 9:
+            print("### Nejvyšší množství ###")
+            max_amount()
             print("")
             menu()
         case _:
