@@ -1,20 +1,6 @@
 
 products = [
-    {
-        "name": "Audi",
-        "price": 50,
-        "amount": 50
-    },
-    {
-        "name": "Audi",
-        "price": 50,
-        "amount": 50
-    },
-    {
-        "price": 30,
-        "name": "BMW",
-        "amount": 10
-    }
+
 ]
 
 
@@ -26,12 +12,14 @@ def print_products():
 def add_product():
     product_name = input("Název produktu:")
     product_price = input("Název cenu:")
-    product2 = {
+    product_amount = input("Název množství:")
+    product = {
         'name': product_name,
-        'price': product_price
+        'price': product_price,
+        'amount': product_amount
     }
 
-    products.append(product2)
+    products.append(product)
 
 
 def search_product():
