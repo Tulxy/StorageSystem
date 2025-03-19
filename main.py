@@ -1,4 +1,3 @@
-
 products = [
 
 ]
@@ -54,15 +53,26 @@ def remove_product():
 
 
 def search_product():
-    search = input("Zadej název produktu: ")
-    found = False
+  available = input("Chceš zobrazit pouze produkty, které jsou skladem? 1 - ano, 2 - ne: ")
+  search = input("Zadej název produktu: ")
+  found = False
 
-    for product in products:
-        if search.lower() in product['name'].lower():
-            print(f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}")
-            found = True
-    if not found:
-        print("Produkt nebyl nalezen")
+  for product in products:
+    name_match = search.lower() in product['name'].lower()
+    in_stock = product['availability'] == "Skladem"
+
+    if available == "1":
+      if name_match and in_stock:
+        print(f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}")
+        found = True
+    else:
+      if name_match:
+        print(
+          f"Název produktu: {product['name']}\n cena: {product['price']}$\n množství: {product['amount']}\n {product['availability']}")
+        found = True
+
+  if not found:
+    print("Produkt nebyl nalezen")
 
 
 def total_price():
@@ -110,6 +120,10 @@ def edit_product():
         products[edit_choice]['name'] = new_name
         products[edit_choice]['price'] = new_price
         products[edit_choice]['amount'] = new_amount
+        if new_amount == 0:
+            products[edit_choice]['availability'] = "Není skladem"
+        else:
+            products[edit_choice]['availability'] = "Skladem"
     else:
         print("Neplatná volba")
 
