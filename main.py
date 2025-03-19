@@ -1,3 +1,5 @@
+from pyautogui import doubleClick
+
 products = [
     {
         "name": "Audi",
@@ -24,6 +26,18 @@ def add_product():
     }
 
     products.append(product2)
+
+
+def search_product():
+    search = input("Zadej název produktu: ")
+    found = False
+
+    for product in products:
+        if search.lower() in product['name'].lower():
+            print(f"Název produktu: {product['name']}, cena: {product['price']}$")
+            found = True
+    if not found:
+        print("Produkt nebyl nalezen")
 
 
 def total_price():
@@ -65,13 +79,14 @@ def edit_product():
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
-    print("1. Výpis polože")
+    print("1. Výpis položek")
     print("2. Přidání položky")
     print("3. Celková cena")
     print("4. Nejvyšší cena")
     print("5. Nejnižší cena")
     print("6. Průměrná cena")
     print("7. Upravit položku")
+    print("8. Hledání položky")
 
     choice = int(input("Volba: \n"))
 
@@ -109,6 +124,11 @@ def menu():
         case 7:
             print("### Upravit položku ###")
             edit_product()
+            print("")
+            menu()
+        case 8:
+            print("### Hledání položky ###")
+            search_product()
             print("")
             menu()
         case _:
