@@ -45,6 +45,23 @@ def average_price():
     average = sum([product['price'] for product in products]) / len(products)
     print(f"Průměrná cena: {average}$")
 
+
+def edit_product():
+    for index, product in enumerate(products):
+        print(f"{index + 1}. {product['name']} - {product['price']}$")
+
+    edit_choice = int(input("Zadej číslo produktu, který chceš upravit: ")) - 1
+
+    if 0 <= edit_choice < len(products):
+        new_name = input("Zadej nový název produktu: ")
+        new_price = int(input("Zadej novou cenu produktu: "))
+
+        products[edit_choice]['name'] = new_name
+        products[edit_choice]['price'] = new_price
+    else:
+        print("Neplatná volba")
+
+
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
@@ -54,30 +71,49 @@ def menu():
     print("4. Nejvyšší cena")
     print("5. Nejnižší cena")
     print("6. Průměrná cena")
+    print("7. Upravit položku")
 
-    choice = int(input("Volba: "))
+    choice = int(input("Volba: \n"))
 
     match choice:
         case 1:
             print("### Vypsání položek #### ")
             print_products()
+            print("")
+            menu()
         case 2:
             print("### Přidání položky ###")
             add_product()
+            print("")
+            menu()
         case 3:
             print("### Celková cena ###")
             total_price()
+            print("")
+            menu()
         case 4:
             print("### Nejvyšší cena ###")
             max_price()
+            print("")
+            menu()
         case 5:
             print("### Nejnižší cena ###")
             min_price()
+            print("")
+            menu()
         case 6:
             print("### Průměrná cena ###")
             average_price()
+            print("")
+            menu()
+        case 7:
+            print("### Upravit položku ###")
+            edit_product()
+            print("")
+            menu()
         case _:
             print("Neplatná volba")
-
+            print("")
+            menu()
 
 menu()
